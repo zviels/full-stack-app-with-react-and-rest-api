@@ -1,6 +1,7 @@
 // Import Modules
 
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 
 const connectToDatabase = require('./functions/connect-to-database');
@@ -13,6 +14,10 @@ const app = express();
 // Enable JSON Parsing
 
 app.use(express.json());
+
+// Enable CORS Requests
+
+app.use(cors());
 
 // Set Up Morgan For HTTP Request Logging
 
