@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import DataManager from '../Utilities/DataManager';
+import { APIContext } from '../Context';
 
 import Course from './Course';
 import NewCourseButton from './NewCourseButton';
@@ -13,13 +13,16 @@ const Courses = () => {
 
     const [courses, setCourses] = useState([]);
 
+    // Use The API Context
+
+    const { dataManager } = useContext(APIContext);
+
     // Helper Functions
 
     // fetchCourses
 
     const fetchCourses = async () => {
 
-        const dataManager = new DataManager();
         const courses = await dataManager.getCourses();
         setCourses(courses);
 
