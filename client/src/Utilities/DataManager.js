@@ -25,6 +25,21 @@ class DataManager {
 
     }
 
+    // getCourse
+
+    getCourse(id) {
+
+        const f = handleAsyncOperation (async (id) => {
+
+            const { data } = await API.get('/courses/' + id);
+            return data;
+
+        });
+
+        return f(id);
+        
+    }
+
 }
 
 // Export The Data Manager

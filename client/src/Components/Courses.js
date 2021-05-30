@@ -34,8 +34,8 @@ const Courses = () => {
 
         return courses.map((course) => {
 
-            const { id, title } = course;
-            return <Course key= { id } title= { title } />
+            const { id } = course;
+            return <Course key= { id } course= { course } />
 
         });
 

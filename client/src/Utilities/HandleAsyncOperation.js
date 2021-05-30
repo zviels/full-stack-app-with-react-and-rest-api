@@ -2,11 +2,11 @@
 
 const handleAsyncOperation = (callback) => {
 
-    return async () => {
+    return async (id) => {
 
         try {
 
-            return await callback();
+            return await callback(id);
 
         } catch (error) {
 
