@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // The Header Component
 
@@ -17,7 +18,7 @@ const Header = () => {
                             <a href="/sign-up">Sign Up</a>
                         </li>
                         <li>
-                            <a href="/sign-in">Sign In</a>
+                            <Link to="/sign-in">Sign In</Link>
                         </li>
                     </ul>
                 </nav>

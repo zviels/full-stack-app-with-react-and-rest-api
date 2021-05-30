@@ -40,6 +40,21 @@ class DataManager {
         
     }
 
+    // signIn
+
+    signIn(credentials) {
+
+        const f = handleAsyncOperation (async ({ email, password }) => {
+
+            const { data } = await API.get('/users', { auth: { username: email, password } });
+            return data;
+
+        });
+
+        return f(credentials);
+
+    }
+
 }
 
 // Export The Data Manager

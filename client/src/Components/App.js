@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { APIProvider } from '../Context';
 
 import Header from './Header';
+import UserSignIn from './UserSignIn';
 import Courses from './Courses';
 import CourseDetail from './CourseDetail';
 
@@ -16,14 +17,19 @@ const App = () => {
         <APIProvider>
             <BrowserRouter>
                 <Header />
-                <Switch>
-                    <Route exact path="/">
-                        <Courses />
-                    </Route>
-                    <Route path="/courses/:id">
-                        <CourseDetail />
-                    </Route>
-                </Switch>
+                <main>
+                    <Switch>
+                        <Route exact path="/">
+                            <Courses />
+                        </Route>
+                        <Route path="/sign-in">
+                            <UserSignIn />
+                        </Route>
+                        <Route path="/courses/:id">
+                            <CourseDetail />
+                        </Route>
+                    </Switch>
+                </main>
             </BrowserRouter>
         </APIProvider>
 

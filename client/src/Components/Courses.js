@@ -49,12 +49,10 @@ const Courses = () => {
 
     return (
 
-        <main>
-            <div className="wrap main--grid">
-                { renderCourses() }
-                <NewCourseButton />
-            </div>
-        </main>
+        <div className="wrap main--grid">
+            { renderCourses() }
+            <NewCourseButton />
+        </div>
 
     );
 

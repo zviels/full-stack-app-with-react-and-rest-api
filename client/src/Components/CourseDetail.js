@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
@@ -54,7 +54,7 @@ const CourseDetail = () => {
     
     return (
 
-        <main>
+        <Fragment>
             <ActionsBar />
             <div className="wrap">
                 <h2>Course Detail</h2>
@@ -91,7 +91,7 @@ const CourseDetail = () => {
                     </div>
                 </form>
             </div>
-        </main>
+        </Fragment>
 
     );
 
