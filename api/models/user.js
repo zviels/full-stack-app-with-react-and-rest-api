@@ -107,20 +107,29 @@ module.exports = (sequelize, DataTypes) => {
 
           msg: 'Password Is Required.'
 
+        },
+
+        notEmpty: {
+
+          msg: 'Please Provide A Password.'
+
         }
 
       },
-
-      set (password) {
-
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        this.setDataValue('password', hashedPassword);
-
-      }
       
     }
 
-  }, { sequelize, modelName: 'User' });
+  }, { 
+
+      hooks: {
+
+        beforeCreate: async (user) => user.password = await bcrypt.hash(user.password, 10)
+
+      }, 
+      
+      sequelize, modelName: 'User' 
+  
+    });
 
   return User;
 

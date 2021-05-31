@@ -11,7 +11,7 @@ const UserSignIn = () => {
 
     // Initialize State
 
-    const [email, setEmail] = useState('');
+    const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
@@ -35,13 +35,12 @@ const UserSignIn = () => {
 
         event.preventDefault();
 
-        if ((!(email)) || (!(password)))
+        if ((!(emailAddress)) || (!(password)))
             return setErrors([ 'Both Email & Password Are Required Fields.' ]);
 
         try { 
 
-            const user = await dataManager.signIn({ email, password });
-            setAuthenticatedUser(user);
+            await dataManager.signIn({ emailAddress, password });
             history.push('/');
 
         } catch (error) {
@@ -52,7 +51,7 @@ const UserSignIn = () => {
     
     }
 
-    // Decide If There Is An Error Or Not
+    // See If There Is An Error Or Not
 
     const error = errors.length > 0 ? <Errors errors= { errors } /> : null;
 
@@ -67,7 +66,7 @@ const UserSignIn = () => {
                 <label htmlFor="emailAddress">
                     Email Address
                 </label>
-                <input id="emailAddress" name="emailAddress" type="email" value= { email } onChange= { (e) => setEmail(e.target.value) } />
+                <input id="emailAddress" name="emailAddress" type="email" value= { emailAddress } onChange= { (e) => setEmailAddress(e.target.value) } />
                 <label htmlFor="password">
                     Password
                 </label>
@@ -79,7 +78,7 @@ const UserSignIn = () => {
                     Cancel
                 </button>
             </form>
-            <p>Don't Have A User Account? Click Here To <Link to="/sign-up">Sign Up!</Link></p>
+            <p>Don't Have A User Account? Click Here To <Link to="/sign-up">Sign Up</Link>!</p>
         </div>
 
     );

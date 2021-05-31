@@ -12,10 +12,14 @@ const handleAsyncOperation = (callback) => {
             
             console.error(error);
 
-            if (typeof param === 'object')
+            if (typeof param === 'object') {
+
                 throw error;
+
+            }
                 
-            // For Sign In, Get The Error Message From The API With 'Error.Response.Data.ErrorMessage'
+                
+            // For Sign In & Sign Up, Get The Error Message From The API With 'Error.Response.Data.ErrorMessage'
 
         }
 

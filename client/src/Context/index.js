@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import DataManager from '../Utilities/DataManager';
+import handleAsyncOperation from '../Utilities/HandleAsyncOperation';
+import API from '../Utilities/APIConfig';
 
 // Create API Context
 
@@ -22,12 +24,30 @@ const APIProvider = ({ children }) => {
 
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
-    // Define The Sign Out Functionality
+    // Define The Sign In Function
+
+    const signIn = (credentials) => {
+
+        const f = handleAsyncOperation (async ({ emailAddress, password }) => {
+
+            const { data } = await API.get('/users', { auth: { username: emailAddress, password } });
+            setAuthenticatedUser(data);
+            
+            return data;
+
+        });
+
+        return f(credentials);
+
+    }
+
+    // Define The Sign Out Function
 
     const signOut = () => setAuthenticatedUser(null);
     
-    // Assign The Sign Out Function To The Data Manager
+    // Assign The Sign In & Sign Out Functions To The Data Manager
 
+    dataManager.signIn = signIn;
     dataManager.signOut = signOut;
 
     // Define What To Provide

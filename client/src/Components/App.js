@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { APIProvider } from '../Context';
 
 import Header from './Header';
+import UserSignUp from './UserSignUp';
 import UserSignIn from './UserSignIn';
 import UserSignOut from './UserSignOut';
 import Courses from './Courses';
@@ -22,6 +23,9 @@ const App = () => {
                     <Switch>
                         <Route exact path="/">
                             <Courses />
+                        </Route>
+                        <Route path="/sign-up">
+                            <UserSignUp />
                         </Route>
                         <Route path="/sign-in">
                             <UserSignIn />

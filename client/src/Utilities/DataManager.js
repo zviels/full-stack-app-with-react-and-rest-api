@@ -40,18 +40,18 @@ class DataManager {
         
     }
 
-    // signIn
+    // signUp
 
-    signIn(credentials) {
+    signUp(user) {
 
-        const f = handleAsyncOperation (async ({ email, password }) => {
+        const f = handleAsyncOperation (async (user) => {
 
-            const { data } = await API.get('/users', { auth: { username: email, password } });
+            const { data } = await API.post('/users', user);
             return data;
 
         });
 
-        return f(credentials);
+        return f(user);
 
     }
 
