@@ -5,6 +5,7 @@ import { APIProvider } from '../Context';
 
 import Header from './Header';
 import UserSignIn from './UserSignIn';
+import UserSignOut from './UserSignOut';
 import Courses from './Courses';
 import CourseDetail from './CourseDetail';
 
@@ -24,6 +25,9 @@ const App = () => {
                         </Route>
                         <Route path="/sign-in">
                             <UserSignIn />
+                        </Route>
+                        <Route path="/sign-out">
+                            <UserSignOut />
                         </Route>
                         <Route path="/courses/:id">
                             <CourseDetail />
