@@ -22,6 +22,14 @@ const APIProvider = ({ children }) => {
 
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
+    // Define The Sign Out Functionality
+
+    const signOut = () => setAuthenticatedUser(null);
+    
+    // Assign The Sign Out Function To The Data Manager
+
+    dataManager.signOut = signOut;
+
     // Define What To Provide
 
     const value = {

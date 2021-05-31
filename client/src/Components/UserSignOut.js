@@ -9,11 +9,11 @@ const UserSignOut = () => {
 
     // Use Context
 
-    const { setAuthenticatedUser } = useContext(APIContext);
+    const { dataManager } = useContext(APIContext);
 
     // Sign Out
 
-    setAuthenticatedUser(null);
+    dataManager.signOut();
 
     // Redirect User To The Home Page
 
