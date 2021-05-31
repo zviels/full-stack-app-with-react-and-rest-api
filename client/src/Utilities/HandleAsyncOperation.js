@@ -9,8 +9,13 @@ const handleAsyncOperation = (callback) => {
             return await callback(param);
 
         } catch (error) {
+            
+            console.error(error);
 
-            console.error('An Error Occurred: ' + error);
+            if (typeof param === 'object')
+                throw error;
+                
+            // For Sign In, Get The Error Message From The API With 'Error.Response.Data.ErrorMessage'
 
         }
 

@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 
+import Errors from './Errors';
+
 // The Sign In Form
 
 const UserSignIn = () => {
@@ -11,10 +13,11 @@ const UserSignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
 
     // Use The API Context
 
-    const { dataManager } = useContext(APIContext);
+    const { dataManager, setAuthenticatedUser } = useContext(APIContext);
 
     // Use History
 
@@ -32,10 +35,26 @@ const UserSignIn = () => {
 
         event.preventDefault();
 
-        const data = await dataManager.signIn({ email, password });
-        console.log(data);
+        if ((!(email)) || (!(password)))
+            return setErrors([ 'Both Email & Password Are Required Fields.' ]);
 
+        try { 
+
+            const user = await dataManager.signIn({ email, password });
+            setAuthenticatedUser(user);
+            history.push('/');
+
+        } catch (error) {
+            
+            setErrors([ 'Sign In Was Unsuccessful.' ]);
+
+        }
+    
     }
+
+    // Decide If There Is An Error Or Not
+
+    const error = errors.length > 0 ? <Errors errors= { errors } /> : null;
 
     // JSX
 
@@ -43,6 +62,7 @@ const UserSignIn = () => {
 
         <div className="form--centered">
             <h2>Sign In</h2>
+            { error }
             <form onSubmit= { submit }>
                 <label htmlFor="emailAddress">
                     Email Address

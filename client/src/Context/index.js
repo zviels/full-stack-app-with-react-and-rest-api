@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import DataManager from '../Utilities/DataManager';
 
@@ -14,17 +14,25 @@ const { Provider } = APIContext;
 
 const dataManager = new DataManager();
 
-// Define What To Provide
-
-const value = {
-
-    dataManager
-
-}
-
 // Create The API Provider
 
 const APIProvider = ({ children }) => {
+
+    // Initialize State
+
+    const [authenticatedUser, setAuthenticatedUser] = useState(null);
+
+    // Define What To Provide
+
+    const value = {
+
+        dataManager,
+        authenticatedUser,
+        setAuthenticatedUser
+
+    }
+
+    // JSX
 
     return (
 
