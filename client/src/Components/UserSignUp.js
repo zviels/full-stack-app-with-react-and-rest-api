@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
+import change from '../Functions/change';
 
 import Errors from './Errors';
 
@@ -20,17 +21,13 @@ const UserSignUp = () => {
 
     // Use Context
 
-    const { dataManager, setAuthenticatedUser } = useContext(APIContext);
+    const { dataManager } = useContext(APIContext);
 
     // Use History
 
     const history = useHistory();
 
     // Helper Functions
-
-    // Change
-
-    const change = (event, setter) => setter(event.target.value);
 
     // Submit
 

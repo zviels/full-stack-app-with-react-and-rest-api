@@ -22,6 +22,7 @@ router.get('/', authenticateUser, handleAsyncOperation (async (req, res, next) =
     
     res.status(200).json({
 
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         emailAddress: user.emailAddress
