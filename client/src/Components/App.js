@@ -42,9 +42,9 @@ const App = () => {
                         <Route exact path="/courses/:id">
                             <CourseDetail />
                         </Route>
-                        <Route path="/courses/:id/update">
+                        <PrivateRoute path="/courses/:id/update">
                             <UpdateCourse />
-                        </Route>
+                        </PrivateRoute>
                     </Switch>
                 </main>
             </BrowserRouter>

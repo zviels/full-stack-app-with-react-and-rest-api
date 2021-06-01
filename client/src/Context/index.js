@@ -77,16 +77,27 @@ const APIProvider = ({ children }) => {
         const f = handleAsyncOperation (async (updatedCourse) => {
 
             const { id } = updatedCourse;
-
-            // const { title, description, estimatedTime, materialsNeeded, userId } = updatedCourse;
-            // const details = { title, description, estimatedTime, materialsNeeded, userId };
-
             const { data } = await API.put('/courses/' + id, updatedCourse, authConfig());
+            
             return data;
 
         });
 
         return f(details);
+
+    }
+
+    // Define The 'Delete Course' Function
+
+    const deleteCourse = (courseID) => {
+
+        const f = handleAsyncOperation (async (courseID) => {
+
+            await API.delete('/courses/' + courseID, authConfig());
+
+        });
+
+        return f(courseID);
 
     }
     
@@ -96,6 +107,7 @@ const APIProvider = ({ children }) => {
     dataManager.signOut = signOut;
     dataManager.createCourse = createCourse;
     dataManager.updateCourse = updateCourse;
+    dataManager.deleteCourse = deleteCourse;
 
     // Define What To Provide
 
