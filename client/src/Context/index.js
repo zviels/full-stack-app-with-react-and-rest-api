@@ -24,6 +24,11 @@ const APIProvider = ({ children }) => {
 
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
+    // Auth Config
+    // Function That Returns The Authentication Configuration Object
+
+    const authConfig = () => ({ auth: { username: authenticatedUser.emailAddress, password: authenticatedUser.password } });
+
     // Define The Sign In Function
 
     const signIn = (credentials) => {
@@ -49,27 +54,13 @@ const APIProvider = ({ children }) => {
 
     const signOut = () => setAuthenticatedUser(null);
 
-    // Define The Create Course Function
+    // Define The 'Create Course' Function
 
     const createCourse = (details) => {
 
         const f = handleAsyncOperation (async (details) => {
-
-            console.log(authenticatedUser);
-            console.log(details);
             
-            const { data } = await API.post('/courses', details, 
-            
-            { auth: 
-                
-                { 
-                    
-                    username: authenticatedUser.emailAddress, 
-                    password: authenticatedUser.password 
-                
-                }
-            
-            });
+            const { data } = await API.post('/courses', details, authConfig());
 
             return data;
 
@@ -78,12 +69,33 @@ const APIProvider = ({ children }) => {
         return f(details);
         
     }
+
+    // Define The 'Update Course' Function
+
+    const updateCourse = (details) => {
+
+        const f = handleAsyncOperation (async (updatedCourse) => {
+
+            const { id } = updatedCourse;
+
+            // const { title, description, estimatedTime, materialsNeeded, userId } = updatedCourse;
+            // const details = { title, description, estimatedTime, materialsNeeded, userId };
+
+            const { data } = await API.put('/courses/' + id, updatedCourse, authConfig());
+            return data;
+
+        });
+
+        return f(details);
+
+    }
     
     // Assign The Functions To The Data Manager
 
     dataManager.signIn = signIn;
     dataManager.signOut = signOut;
     dataManager.createCourse = createCourse;
+    dataManager.updateCourse = updateCourse;
 
     // Define What To Provide
 

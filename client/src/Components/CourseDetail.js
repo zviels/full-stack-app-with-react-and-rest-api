@@ -55,7 +55,7 @@ const CourseDetail = () => {
     return (
 
         <Fragment>
-            <ActionsBar />
+            <ActionsBar courseID= { id } />
             <div className="wrap">
                 <h2>Course Detail</h2>
                 <form>

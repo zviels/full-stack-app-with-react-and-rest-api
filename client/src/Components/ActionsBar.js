@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 // The Actions Bar Component
 
-const ActionsBar = () => {
+const ActionsBar = ({ courseID }) => {
 
     return (
 
         <div className="actions--bar">
             <div className="wrap">
-                <a className="button" href="/update-course">
+                <Link className="button" to={ "/courses/" + courseID + "/update" }>
                     Update Course
-                </a>
+                </Link>
                 <a className="button" href="#">
                     Delete Course
                 </a>

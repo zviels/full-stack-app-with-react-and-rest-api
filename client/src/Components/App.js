@@ -10,6 +10,7 @@ import UserSignOut from './UserSignOut';
 import Courses from './Courses';
 import CourseDetail from './CourseDetail';
 import CreateCourse from './CreateCourse';
+import UpdateCourse from './UpdateCourse';
 import PrivateRoute from './PrivateRoute';
 
 // The App Component
@@ -38,8 +39,11 @@ const App = () => {
                         <PrivateRoute path="/courses/create">
                             <CreateCourse />
                         </PrivateRoute>
-                        <Route path="/courses/:id">
+                        <Route exact path="/courses/:id">
                             <CourseDetail />
+                        </Route>
+                        <Route path="/courses/:id/update">
+                            <UpdateCourse />
                         </Route>
                     </Switch>
                 </main>
