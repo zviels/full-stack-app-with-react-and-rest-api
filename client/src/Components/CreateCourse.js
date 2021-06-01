@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import change from '../Functions/change';
+import extractMessages from '../Functions/extractMessages';
 
 import Errors from './Errors';
 
@@ -38,18 +39,16 @@ const CreateCourse = () => {
 
         try {
 
-            const newCourse = { title, description, estimatedTime, materialsNeeded, userId: authenticatedUser.id };
+            const userId = authenticatedUser.id;
+
+            const newCourse = { title, description, estimatedTime, materialsNeeded, userId };
             await dataManager.createCourse(newCourse);
+
             history.push('/');
 
         } catch (error) {
 
-            // To Do - Create A Modular Function, 'extractMessages'
-
-            const { response } = error;
-            const { data } = response;
-            const { errorMessages } = data;
-            
+            const errorMessages = extractMessages(error);
             setErrors(errorMessages);
 
         }

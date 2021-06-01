@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import change from '../Functions/change';
+import extractMessages from '../Functions/extractMessages';
 
 import Errors from './Errors';
 
@@ -47,11 +48,8 @@ const UserSignUp = () => {
             history.push('/');
 
         } catch (error) {
-
-            const { response } = error;
-            const { data } = response;
-            const { errorMessages } = data;
             
+            const errorMessages = extractMessages(error);
             setErrors(errorMessages);
 
         }
