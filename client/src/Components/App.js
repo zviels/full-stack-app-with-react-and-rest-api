@@ -9,6 +9,7 @@ import UserSignIn from './UserSignIn';
 import UserSignOut from './UserSignOut';
 import Courses from './Courses';
 import CourseDetail from './CourseDetail';
+import CreateCourse from './CreateCourse';
 
 // The App Component
 
@@ -32,6 +33,9 @@ const App = () => {
                         </Route>
                         <Route path="/sign-out">
                             <UserSignOut />
+                        </Route>
+                        <Route path="/courses/create">
+                            <CreateCourse />
                         </Route>
                         <Route path="/courses/:id">
                             <CourseDetail />
