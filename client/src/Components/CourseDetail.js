@@ -1,8 +1,10 @@
 import React, { Fragment, useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import { APIContext } from '../Context';
+import extractStatus from '../Functions/extractStatus';
+import extractMessages from '../Functions/extractMessages';
 
 import ActionsBar from './ActionsBar';
 
@@ -13,6 +15,7 @@ const CourseDetail = () => {
     // Initialize State
 
     const [details, setDetails] = useState({});
+    const [status, setStatus] = useState();
 
     // Use The API Context
 
@@ -28,8 +31,18 @@ const CourseDetail = () => {
 
     const fetchCourse = async (id) => {
 
-        const course = await dataManager.getCourse(id);
-        setDetails(course);
+        try {
+
+            const course = await dataManager.getCourse(id);
+            setDetails(course);
+
+        } catch (error) {
+
+            const status = extractStatus(error);
+            setStatus(status);
+
+        }
+        
 
     }
 
@@ -39,9 +52,14 @@ const CourseDetail = () => {
 
     // JSX
 
-    // If The Details Have Not Been Loaded Yet - Don't Render Anything
+    // If The Course Wasn't Returned - Redirect User
 
-    if (Object.keys(details).length === 0)
+    if (status === 404)
+        return <Redirect to="/not-found" />
+
+    // Else, If The Details Have Not Been Loaded Yet - Don't Render Anything
+
+    else if (Object.keys(details).length === 0)
         return null;
 
     // In Any Other Case..

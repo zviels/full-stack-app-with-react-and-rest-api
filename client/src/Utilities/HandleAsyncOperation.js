@@ -10,9 +10,7 @@ const handleAsyncOperation = (callback) => {
 
         } catch (error) {
             
-            console.error(error);
-
-            if (typeof param === 'object') {
+            if (typeof param === 'object' || typeof param === 'string') {
 
                 throw error;
 
