@@ -52,10 +52,15 @@ const CourseDetail = () => {
 
     // JSX
 
-    // If The Course Wasn't Returned - Redirect User
+    // If The Course Wasn't Found - Redirect User To The 'Not Found' Screen
 
     if (status === 404)
         return <Redirect to="/not-found" />
+    
+    // Else, If There Are Server Errors - Redirect User To The 'Error' Screen
+
+    // else if (status === 500)
+    //     return <Redirect to="/error" />  
 
     // Else, If The Details Have Not Been Loaded Yet - Don't Render Anything
 

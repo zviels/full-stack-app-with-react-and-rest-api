@@ -26,7 +26,7 @@ const PrivateRoute = ({ component: Component, ... rest }) => {
 
         // Use The Render Prop To Pass React Router Props From The Route Component To The Rendered Component
 
-        <Route { ... rest } render={ (props) => <Component { ... props } /> }/>
+        <Route { ... rest } render={ (props) => <Component { ... props } /> } />
 
         :
 

@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import change from '../Functions/change';
 import extractMessages from '../Functions/extractMessages';
+import extractStatus from '../Functions/extractStatus';
 
 import Errors from './Errors';
 
@@ -17,11 +18,17 @@ const UpdateCourse = () => {
     const [description, setDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
+    const [courseCreatorID, setCourseCreatorID] = useState();
     const [errors, setErrors] = useState([]);
+    const [status, setStatus] = useState();
 
     // Use Effect
 
-    useEffect(() => fetchCourse(), []);
+    useEffect(() => {
+        
+        fetchCourse();
+
+    }, []);
 
     // Use Context
 
@@ -41,13 +48,23 @@ const UpdateCourse = () => {
 
     const fetchCourse = async () => {
 
-        const course = await dataManager.getCourse(id);
-        const { title, description, estimatedTime, materialsNeeded } = course;
+        try {
 
-        setTitle(title);
-        setDescription(description);
-        setEstimatedTime(estimatedTime);
-        setMaterialsNeeded(materialsNeeded);
+            const course = await dataManager.getCourse(id);            
+            const { title, description, estimatedTime, materialsNeeded, User } = course;
+
+            setTitle(title);
+            setDescription(description);
+            setEstimatedTime(estimatedTime);
+            setMaterialsNeeded(materialsNeeded);
+            setCourseCreatorID(User.id);
+            
+        } catch (error) {
+
+            const status = extractStatus(error);
+            setStatus(status);
+
+        }
 
     }
 
@@ -76,12 +93,24 @@ const UpdateCourse = () => {
 
     // JSX
 
+    // If The Course Wasn't Found - Redirect User To The 'Not Found' Screen
+
+    if (status === 404)
+        return <Redirect to="/not-found" />
+    
+    // Else, If There Are Server Errors - Redirect User To The 'Error' Screen
+
+    // else if (status === 500)
+    //     return <Redirect to="/error" />    
+
+    // Else, If The Creator ID Has Been Fetched & The Authenticated User Is Not The Creator Of The Course - Forbid Access
+
+    else if (courseCreatorID && authenticatedUser.id !== courseCreatorID)
+        return <Redirect to="/forbidden" />
+
     // See If There Are Error Messages To Be Displayed
 
     const errorMessages = errors.length > 0 ? <Errors errors= { errors } /> : null;
-
-    // If The Authenticated User Is Not The Creator Of The Course..
-        // Forbid Access
 
     return (
 
