@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 import DataManager from '../Utilities/DataManager';
 import handleAsyncOperation from '../Utilities/HandleAsyncOperation';
@@ -22,7 +23,7 @@ const APIProvider = ({ children }) => {
 
     // Initialize State
 
-    const [authenticatedUser, setAuthenticatedUser] = useState(null);
+    const [authenticatedUser, setAuthenticatedUser] = useState(Cookies.getJSON('authenticatedUser') || null);
 
     // Auth Config
     // Function That Returns The Authentication Configuration Object
@@ -37,10 +38,16 @@ const APIProvider = ({ children }) => {
 
             const { data } = await API.get('/users', { auth: { username: emailAddress, password } });
 
-            // Also Save The Password Of The Authenticated User In The Global State
+            // Also Save The Password Of The Authenticated User
 
             data.password = password;
+
+            // Save The User In The Global State & In A Cookie
+
             setAuthenticatedUser(data);
+            Cookies.set('authenticatedUser', JSON.stringify(data));
+
+            // Return The User Data
             
             return data;
 
@@ -52,7 +59,12 @@ const APIProvider = ({ children }) => {
 
     // Define The Sign Out Function
 
-    const signOut = () => setAuthenticatedUser(null);
+    const signOut = () => {
+
+        setAuthenticatedUser(null);
+        Cookies.remove('authenticatedUser');
+        
+    }
 
     // Define The 'Create Course' Function
 
