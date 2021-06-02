@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { APIProvider } from '../Context';
 
@@ -12,6 +12,9 @@ import CourseDetail from './CourseDetail';
 import CreateCourse from './CreateCourse';
 import UpdateCourse from './UpdateCourse';
 import PrivateRoute from './PrivateRoute';
+import NotFound from './NotFound';
+import Forbidden from './Forbidden';
+import UnhandledError from './UnhandledError';
 
 // The App Component
 
@@ -45,6 +48,16 @@ const App = () => {
                         <PrivateRoute path="/courses/:id/update">
                             <UpdateCourse />
                         </PrivateRoute>
+                        <Route path="/not-found">
+                            <NotFound />
+                        </Route>
+                        <Route path="/forbidden">
+                            <Forbidden />
+                        </Route>
+                        <Route path="/error">
+                            <UnhandledError />
+                        </Route>
+                        <Redirect to="/not-found" />
                     </Switch>
                 </main>
             </BrowserRouter>
