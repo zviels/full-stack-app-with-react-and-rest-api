@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 
@@ -13,6 +13,7 @@ const UserSignIn = () => {
 
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
+    const [shouldBeRedirected, setShouldBeRedirected] = useState(false);
     const [errors, setErrors] = useState([]);
 
     // Use The API Context
@@ -22,6 +23,7 @@ const UserSignIn = () => {
     // Use History
 
     const history = useHistory();
+    const location = useLocation();
 
     // Helper Functions
 
@@ -41,7 +43,8 @@ const UserSignIn = () => {
         try { 
 
             await dataManager.signIn({ emailAddress, password });
-            history.push('/');
+            setShouldBeRedirected(true);
+            // history.push('/');
 
         } catch (error) {
             
@@ -50,6 +53,15 @@ const UserSignIn = () => {
         }
     
     }
+
+    // Define Where To Redirect The User
+
+    const path = location.state ? location.state.from.pathname : '/';
+
+    // If Everything Is Okay - Redirect The User
+
+    if (shouldBeRedirected)
+        return <Redirect to= { path } />
 
     // See If There Is An Error Or Not
 

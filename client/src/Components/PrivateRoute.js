@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 
@@ -14,6 +14,10 @@ const PrivateRoute = ({ component: Component, ... rest }) => {
 
     const { authenticatedUser } = useContext(APIContext);
 
+    // Use Location
+
+    const location = useLocation();
+
     // JSX
 
     return (
@@ -26,7 +30,7 @@ const PrivateRoute = ({ component: Component, ... rest }) => {
 
         :
 
-        <Redirect to="/sign-in" />
+        <Redirect to= {{ pathname: '/sign-in', state: { from: location } }} />
 
     );
 
