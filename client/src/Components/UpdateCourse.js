@@ -22,11 +22,8 @@ const UpdateCourse = () => {
 
     // Use Effect
 
-    useEffect(() => {
-        
-        fetchCourse();
-
-    }, []);
+    // eslint-disable-next-line
+    useEffect(() => fetchCourse(), []);
 
     // Use Context
 

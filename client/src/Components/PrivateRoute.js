@@ -8,7 +8,7 @@ import { APIContext } from '../Context';
 // Rename The Component Prop 
 // Collect Any Props That Get Passed In The 'Rest' Variable
 
-const PrivateRoute = ({ component: Component, ... rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
 
     // Use Context
 

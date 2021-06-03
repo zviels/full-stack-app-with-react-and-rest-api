@@ -18,7 +18,7 @@ const UserSignIn = () => {
 
     // Use The API Context
 
-    const { dataManager, setAuthenticatedUser } = useContext(APIContext);
+    const { dataManager } = useContext(APIContext);
 
     // Use History
 

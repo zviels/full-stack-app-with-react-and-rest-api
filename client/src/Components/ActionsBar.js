@@ -22,6 +22,9 @@ const ActionsBar = ({ courseDetails }) => {
 
     const deleteCourse = async () => {
 
+        if (!(authenticatedUser))
+            return history.push('/sign-in');
+
         try {
 
             if (authenticatedUser.id !== courseDetails.User.id)

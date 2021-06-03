@@ -1,11 +1,13 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import { APIContext } from '../Context';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
+import useFetch from '../Hooks/useFetch';
 
 import ActionsBar from './ActionsBar';
-import redirectBasedOnError from '../Functions/redirectBasedOnError';
+
 
 // The Course Detail Component
 
@@ -48,7 +50,9 @@ const CourseDetail = () => {
 
     // Fetch Course Details When The Page First Loads
 
-    useEffect(() => fetchCourse(id), []);
+    useFetch(fetchCourse, id);
+
+    // useEffect(() => fetchCourse(id));
 
     // JSX
 

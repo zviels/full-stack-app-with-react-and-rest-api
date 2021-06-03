@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import redirectBasedOnError from '../Functions/redirectBasedOnError';
+
+import useFetch from '../Hooks/useFetch';
 
 import Course from './Course';
 import NewCourseButton from './NewCourseButton';
@@ -57,7 +59,23 @@ const Courses = () => {
 
     // Fetch Courses When The Page First Loads
 
-    useEffect(() => fetchCourses(), []);
+    useFetch(fetchCourses);
+
+    // useEffect(() => {
+
+    //     let isMounted = true;
+
+    //     // Fetch Data & Set State Only If Component Was Mounted
+
+    //     if (isMounted)
+    //         fetchCourses();
+
+    //     // Clean Up Function
+    //     // Don't Fetch Data And Don't Set State If The Component Is Not Visible
+
+    //     return () => { isMounted = false };
+  
+    // });
 
     // JSX
 

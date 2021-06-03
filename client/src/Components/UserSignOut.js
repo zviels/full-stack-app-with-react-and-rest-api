@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { APIContext } from '../Context';
@@ -13,7 +13,7 @@ const UserSignOut = () => {
 
     // Sign Out
 
-    dataManager.signOut();
+    useEffect(() => dataManager.signOut(), [dataManager]);
 
     // Redirect User To The Home Page
 

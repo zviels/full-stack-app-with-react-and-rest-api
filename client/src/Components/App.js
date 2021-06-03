@@ -39,15 +39,11 @@ const App = () => {
                         <Route path="/sign-out">
                             <UserSignOut />
                         </Route>
-                        <PrivateRoute path="/courses/create">
-                            <CreateCourse />
-                        </PrivateRoute>
+                        <PrivateRoute path="/courses/create" component= { CreateCourse } />
                         <Route exact path="/courses/:id">
                             <CourseDetail />
                         </Route>
-                        <PrivateRoute path="/courses/:id/update">
-                            <UpdateCourse />
-                        </PrivateRoute>
+                        <PrivateRoute path="/courses/:id/update" component= { UpdateCourse } />
                         <Route path="/not-found">
                             <NotFound />
                         </Route>
