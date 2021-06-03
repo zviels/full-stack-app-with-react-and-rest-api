@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
@@ -41,18 +41,39 @@ const ActionsBar = ({ courseDetails }) => {
         
     }
 
+    // showAdminButtons
+
+    const showAdminButtons = () => {
+        
+        if (authenticatedUser && authenticatedUser.id === courseDetails.User.id) {
+
+            return (
+
+                <Fragment>
+                    <Link className="button" to={ "/courses/" + courseDetails.id + "/update" }>
+                        Update Course
+                    </Link>
+                    <Link className="button" onClick= { deleteCourse } to="#">
+                        Delete Course
+                    </Link>
+                </Fragment>
+
+            );
+
+        }
+
+        else
+            return null;
+        
+    }
+
     // JSX
 
     return (
 
         <div className="actions--bar">
             <div className="wrap">
-                <Link className="button" to={ "/courses/" + courseDetails.id + "/update" }>
-                    Update Course
-                </Link>
-                <Link className="button" onClick= { deleteCourse } to="#">
-                    Delete Course
-                </Link>
+                { showAdminButtons() }
                 <Link className="button button-secondary" to="/">
                     Return To List
                 </Link>
