@@ -44,11 +44,16 @@ const UserSignIn = () => {
 
             await dataManager.signIn({ emailAddress, password });
             setShouldBeRedirected(true);
-            // history.push('/');
 
         } catch (error) {
             
-            setErrors([ 'Sign In Was Unsuccessful.' ]);
+            const { response } = error;
+
+            if (response && response.status === 500)
+                history.push('/error');
+                
+            else
+                setErrors([ 'Sign In Was Unsuccessful.' ]);
 
         }
     

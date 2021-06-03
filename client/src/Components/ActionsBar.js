@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 // The Actions Bar Component
 
-const ActionsBar = ({ courseID }) => {
+const ActionsBar = ({ courseDetails }) => {
 
     // Use Context
 
-    const { dataManager } = useContext(APIContext);
+    const { dataManager, authenticatedUser } = useContext(APIContext);
 
     // Use History
 
@@ -21,8 +22,19 @@ const ActionsBar = ({ courseID }) => {
 
     const deleteCourse = async () => {
 
-        await dataManager.deleteCourse(courseID);
-        history.push('/');
+        try {
+
+            if (authenticatedUser.id !== courseDetails.User.id)
+                return history.push('/forbidden');
+
+            await dataManager.deleteCourse(courseDetails.id);
+            history.push('/');
+
+        } catch (error) {
+
+            redirectBasedOnError(history, error);
+
+        }
         
     }
 
@@ -32,7 +44,7 @@ const ActionsBar = ({ courseID }) => {
 
         <div className="actions--bar">
             <div className="wrap">
-                <Link className="button" to={ "/courses/" + courseID + "/update" }>
+                <Link className="button" to={ "/courses/" + courseDetails.id + "/update" }>
                     Update Course
                 </Link>
                 <Link className="button" onClick= { deleteCourse } to="#">

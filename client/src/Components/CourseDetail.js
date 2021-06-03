@@ -1,12 +1,11 @@
 import React, { Fragment, useState, useContext, useEffect } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import { APIContext } from '../Context';
-import extractStatus from '../Functions/extractStatus';
-import extractMessages from '../Functions/extractMessages';
 
 import ActionsBar from './ActionsBar';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 // The Course Detail Component
 
@@ -15,11 +14,14 @@ const CourseDetail = () => {
     // Initialize State
 
     const [details, setDetails] = useState({});
-    const [status, setStatus] = useState();
 
     // Use The API Context
 
     const { dataManager } = useContext(APIContext);
+
+    // Use History
+
+    const history = useHistory();
 
     // Extract The Course ID
 
@@ -38,11 +40,9 @@ const CourseDetail = () => {
 
         } catch (error) {
 
-            const status = extractStatus(error);
-            setStatus(status);
-
+            redirectBasedOnError(history, error);
+    
         }
-        
 
     }
 
@@ -52,19 +52,9 @@ const CourseDetail = () => {
 
     // JSX
 
-    // If The Course Wasn't Found - Redirect User To The 'Not Found' Screen
+    // If The Details Have Not Been Loaded Yet - Don't Render Anything
 
-    if (status === 404)
-        return <Redirect to="/not-found" />
-    
-    // Else, If There Are Server Errors - Redirect User To The 'Error' Screen
-
-    // else if (status === 500)
-    //     return <Redirect to="/error" />  
-
-    // Else, If The Details Have Not Been Loaded Yet - Don't Render Anything
-
-    else if (Object.keys(details).length === 0)
+    if (Object.keys(details).length === 0)
         return null;
 
     // In Any Other Case..
@@ -78,7 +68,7 @@ const CourseDetail = () => {
     return (
 
         <Fragment>
-            <ActionsBar courseID= { id } />
+            <ActionsBar courseDetails= { details } />
             <div className="wrap">
                 <h2>Course Detail</h2>
                 <form>

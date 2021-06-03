@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { APIContext } from '../Context';
 import change from '../Functions/change';
 import extractMessages from '../Functions/extractMessages';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 import Errors from './Errors';
 
@@ -50,7 +51,12 @@ const UserSignUp = () => {
         } catch (error) {
             
             const errorMessages = extractMessages(error);
-            setErrors(errorMessages);
+
+            if (errorMessages)
+                setErrors(errorMessages);
+
+            else
+                redirectBasedOnError(history, error);    
 
         }
 

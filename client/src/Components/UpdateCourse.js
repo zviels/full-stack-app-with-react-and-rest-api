@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import change from '../Functions/change';
 import extractMessages from '../Functions/extractMessages';
-import extractStatus from '../Functions/extractStatus';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 import Errors from './Errors';
 
@@ -18,9 +18,7 @@ const UpdateCourse = () => {
     const [description, setDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
-    const [courseCreatorID, setCourseCreatorID] = useState();
     const [errors, setErrors] = useState([]);
-    const [status, setStatus] = useState();
 
     // Use Effect
 
@@ -53,16 +51,19 @@ const UpdateCourse = () => {
             const course = await dataManager.getCourse(id);            
             const { title, description, estimatedTime, materialsNeeded, User } = course;
 
+            // If The Authenticated User Is Not The Course Creator, Don't Let Him Update The Course
+
+            if (authenticatedUser.id !== User.id)
+                return history.push('/forbidden');
+
             setTitle(title);
             setDescription(description);
             setEstimatedTime(estimatedTime);
             setMaterialsNeeded(materialsNeeded);
-            setCourseCreatorID(User.id);
             
         } catch (error) {
 
-            const status = extractStatus(error);
-            setStatus(status);
+            redirectBasedOnError(history, error);
 
         }
 
@@ -85,28 +86,18 @@ const UpdateCourse = () => {
         } catch (error) {
 
             const errorMessages = extractMessages(error);
-            setErrors(errorMessages);
+
+            if (errorMessages)
+                setErrors(errorMessages);
+
+            else
+                redirectBasedOnError(history, error);    
 
         }
 
     }
 
     // JSX
-
-    // If The Course Wasn't Found - Redirect User To The 'Not Found' Screen
-
-    if (status === 404)
-        return <Redirect to="/not-found" />
-    
-    // Else, If There Are Server Errors - Redirect User To The 'Error' Screen
-
-    // else if (status === 500)
-    //     return <Redirect to="/error" />    
-
-    // Else, If The Creator ID Has Been Fetched & The Authenticated User Is Not The Creator Of The Course - Forbid Access
-
-    else if (courseCreatorID && authenticatedUser.id !== courseCreatorID)
-        return <Redirect to="/forbidden" />
 
     // See If There Are Error Messages To Be Displayed
 

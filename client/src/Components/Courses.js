@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
+import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 import Course from './Course';
 import NewCourseButton from './NewCourseButton';
@@ -17,14 +19,26 @@ const Courses = () => {
 
     const { dataManager } = useContext(APIContext);
 
+    // Use History
+
+    const history = useHistory();
+
     // Helper Functions
 
     // fetchCourses
 
     const fetchCourses = async () => {
 
-        const courses = await dataManager.getCourses();
-        setCourses(courses);
+        try {
+
+            const courses = await dataManager.getCourses();
+            setCourses(courses);
+        
+        } catch (error) {
+
+            redirectBasedOnError(history, error);
+
+        }        
 
     }
 
