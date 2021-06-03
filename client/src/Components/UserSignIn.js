@@ -23,34 +23,54 @@ const UserSignIn = () => {
     // Use History
 
     const history = useHistory();
+
+    // Use Location
+
     const location = useLocation();
 
     // Helper Functions
 
     // Cancel
+    // This Function Navigates The User To The Home Page
 
     const cancel = () => history.push('/');
 
     // Submit
+    // The Purpose Of This Function Is To Authenticate The User
 
     const submit = async (event) => {
 
+        // Prevent The Default Behavior Of The Browser
+
         event.preventDefault();
+
+        // If The User Didn't Enter An Email Address Or A Password - Display An Error Message
 
         if ((!(emailAddress)) || (!(password)))
             return setErrors([ 'Both Email & Password Are Required Fields.' ]);
 
         try { 
 
+            // Try To Authenticate The User
+
             await dataManager.signIn({ emailAddress, password });
+
+            // Redirect The User To The Previous Screen (Or To The Home Page)
+
             setShouldBeRedirected(true);
 
         } catch (error) {
             
+            // Try To Extract The Response Object From The Error Object
+
             const { response } = error;
+
+            // If The Response Object Exists, And Its Status Code Is 500 - Navigate The User To The 'Error' Page
 
             if (response && response.status === 500)
                 history.push('/error');
+
+            // In Any Other Case, Display An Error Message On The Screen
                 
             else
                 setErrors([ 'Sign In Was Unsuccessful.' ]);
@@ -60,6 +80,7 @@ const UserSignIn = () => {
     }
 
     // Define Where To Redirect The User
+    // If The User Was Redirected To The 'Sign In' Page, He'll Be Redirected Back To The Previous Screen After Successfuly Signing In
 
     const path = location.state ? location.state.from.pathname : '/';
 
@@ -68,7 +89,7 @@ const UserSignIn = () => {
     if (shouldBeRedirected)
         return <Redirect to= { path } />
 
-    // See If There Is An Error Or Not
+    // See If There Is An Error To Display
 
     const error = errors.length > 0 ? <Errors errors= { errors } /> : null;
 

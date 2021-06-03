@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom'
 
 const Course = ({ course }) => {
 
+    // Extract The Attributes 'ID' & 'Title' From The Course Object
+
     const { id, title } = course;
+
+    // JSX
 
     return (
 

@@ -8,7 +8,7 @@ import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
 const ActionsBar = ({ courseDetails }) => {
 
-    // Use Context
+    // Use Context To Extract Required Data
 
     const { dataManager, authenticatedUser } = useContext(APIContext);
 
@@ -22,18 +22,29 @@ const ActionsBar = ({ courseDetails }) => {
 
     const deleteCourse = async () => {
 
+        // If The User Is Not Logged In - Redirect Him To The 'Sign In' Page
+
         if (!(authenticatedUser))
             return history.push('/sign-in');
 
         try {
 
+            // If The User Is Not The Creator Of The Course - Redirect Him To The 'Forbidden' Page
+
             if (authenticatedUser.id !== courseDetails.User.id)
                 return history.push('/forbidden');
 
+            // If The User Is Logged In & He Is The Creator Of The Course - Delete The Course
+
             await dataManager.deleteCourse(courseDetails.id);
+
+            // Redirect The User To The Home Page
+
             history.push('/');
 
         } catch (error) {
+
+            // If An Error Occurred, Handle It Using The 'History' Variable, Based On The Caught Error
 
             redirectBasedOnError(history, error);
 
@@ -42,6 +53,7 @@ const ActionsBar = ({ courseDetails }) => {
     }
 
     // showAdminButtons
+    // Display The 'Update Course' & 'Delete Course' Buttons Only If The User Is Logged In, And He Is The Creator Of The Course
 
     const showAdminButtons = () => {
         

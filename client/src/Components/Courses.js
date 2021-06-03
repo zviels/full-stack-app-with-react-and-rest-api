@@ -33,10 +33,14 @@ const Courses = () => {
 
         try {
 
+            // Try To Fetch & Save Information About The Different Courses 
+
             const courses = await dataManager.getCourses();
             setCourses(courses);
         
         } catch (error) {
+
+            // If An Error Occurred - Handle It
 
             redirectBasedOnError(history, error);
 
@@ -45,6 +49,7 @@ const Courses = () => {
     }
 
     // renderCourses
+    // This Function Returns A List Of Courses To Display
 
     const renderCourses = () => {
 
@@ -60,22 +65,6 @@ const Courses = () => {
     // Fetch Courses When The Page First Loads
 
     useFetch(fetchCourses);
-
-    // useEffect(() => {
-
-    //     let isMounted = true;
-
-    //     // Fetch Data & Set State Only If Component Was Mounted
-
-    //     if (isMounted)
-    //         fetchCourses();
-
-    //     // Clean Up Function
-    //     // Don't Fetch Data And Don't Set State If The Component Is Not Visible
-
-    //     return () => { isMounted = false };
-  
-    // });
 
     // JSX
 

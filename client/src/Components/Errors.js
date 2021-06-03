@@ -5,6 +5,7 @@ import React from 'react';
 const Errors = ({ errors }) => {
 
     // renderErrors
+    // This Function Returns A List Of Errors To Display
 
     const renderErrors = () => errors.map((error, index) => <li key= { index }>{ error }</li>);
 

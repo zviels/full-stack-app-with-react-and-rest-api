@@ -2,6 +2,8 @@
 
 import API from './APIConfig';
 
+// Import The 'handleAsyncOperation' Function
+
 import handleAsyncOperation from './HandleAsyncOperation';
 
 // Create The Class Of The Data Manager
@@ -11,6 +13,7 @@ class DataManager {
     // Methods
 
     // getCourses
+    // This Function Returns A List Of Courses From The Database
 
     getCourses() {
 
@@ -26,6 +29,7 @@ class DataManager {
     }
 
     // getCourse
+    // This Function Returns A Specific Course From The Database
 
     getCourse(id) {
 
@@ -41,6 +45,7 @@ class DataManager {
     }
 
     // signUp
+    // This Function Inserts A New User Into The Database
 
     signUp(user) {
 

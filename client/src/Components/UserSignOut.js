@@ -11,7 +11,7 @@ const UserSignOut = () => {
 
     const { dataManager } = useContext(APIContext);
 
-    // Sign Out
+    // Call The 'Sign Out' Function Immediately
 
     useEffect(() => dataManager.signOut(), [dataManager]);
 

@@ -1,5 +1,5 @@
 // extractMessages
-// This Function Receives An Error Object & Returns Error Messages
+// This Function Receives An Error Object & Extracts Error Messages From It
 
 const extractMessages = (error) => {
 

@@ -1,5 +1,5 @@
 // extractStatus
-// This Function Receives An Error Object & Returns A Status Code
+// This Function Receives An Error Object & Returns The Status Code Of That Error
 
 const extractStatus = (error) => {
 

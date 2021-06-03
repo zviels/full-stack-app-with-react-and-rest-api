@@ -8,7 +8,6 @@ import useFetch from '../Hooks/useFetch';
 
 import ActionsBar from './ActionsBar';
 
-
 // The Course Detail Component
 
 const CourseDetail = () => {
@@ -17,7 +16,7 @@ const CourseDetail = () => {
 
     const [details, setDetails] = useState({});
 
-    // Use The API Context
+    // Use The API Context To Extract The 'Data Manager' Object & Its Functionality 
 
     const { dataManager } = useContext(APIContext);
 
@@ -25,7 +24,7 @@ const CourseDetail = () => {
 
     const history = useHistory();
 
-    // Extract The Course ID
+    // Extract The Course ID From The URL
 
     const { id } = useParams();
 
@@ -35,12 +34,16 @@ const CourseDetail = () => {
 
     const fetchCourse = async (id) => {
 
+        // Try To Fetch & Save The Course Data
+
         try {
 
             const course = await dataManager.getCourse(id);
             setDetails(course);
 
         } catch (error) {
+
+            // If An Error Occurred - Handle It
 
             redirectBasedOnError(history, error);
     
@@ -51,8 +54,6 @@ const CourseDetail = () => {
     // Fetch Course Details When The Page First Loads
 
     useFetch(fetchCourse, id);
-
-    // useEffect(() => fetchCourse(id));
 
     // JSX
 

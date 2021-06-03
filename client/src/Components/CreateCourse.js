@@ -20,7 +20,7 @@ const CreateCourse = () => {
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
 
-    // Use Context
+    // Use Context To Extract Required Data
 
     const { authenticatedUser, dataManager } = useContext(APIContext);
 
@@ -34,25 +34,39 @@ const CreateCourse = () => {
 
     // Helper Functions
 
+    // Submit
+
     const submit = async (event) => {
+
+        // When The User Clicks On The 'Submit' Button, Prevent The Default Behavior Of The Form
 
         event.preventDefault();
 
         try {
 
-            const userId = authenticatedUser.id;
+            // Try To Insert A New Course Into The Database
 
+            const userId = authenticatedUser.id;
             const newCourse = { title, description, estimatedTime, materialsNeeded, userId };
             await dataManager.createCourse(newCourse);
+
+            // If All Went Well - Redirect The User To The Home Page
 
             history.push('/');
 
         } catch (error) {
 
+            // If An Error Occurred, Try To Extract Error Messages From The Error Object
+
             const errorMessages = extractMessages(error);
+
+            // If There Are Error Messages - Save Them
 
             if (errorMessages)
                 setErrors(errorMessages);
+
+            // If The Error Messages Couldn't Be Extracted - The Error Is Probably A Server Error
+            // Handle It With The 'redirectBasedOnError' Function
 
             else
                 redirectBasedOnError(history, error);

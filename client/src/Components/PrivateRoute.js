@@ -10,7 +10,7 @@ import { APIContext } from '../Context';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-    // Use Context
+    // Use Context To Extract Useful Information About The Authenticated User
 
     const { authenticatedUser } = useContext(APIContext);
 
@@ -22,12 +22,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     return (
 
+        // If The User Is Logged In - Show Him The Page He Requested
+
         authenticatedUser ?
 
         // Use The Render Prop To Pass React Router Props From The Route Component To The Rendered Component
 
         <Route { ... rest } render={ (props) => <Component { ... props } /> } />
 
+        // If The User Is Not Logged In - Redirect Him To The 'Sign In' Page
+        
         :
 
         <Redirect to= {{ pathname: '/sign-in', state: { from: location } }} />

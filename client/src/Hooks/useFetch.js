@@ -10,7 +10,6 @@ const useFetch = (fetch, data) => {
     const [isVisible, setIsVisible] = useState(true);
 
     // Use Effect
-    // Run This Function When The Page First Loads
 
     useEffect(() => {
 

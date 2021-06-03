@@ -5,7 +5,7 @@ import DataManager from '../Utilities/DataManager';
 import handleAsyncOperation from '../Utilities/HandleAsyncOperation';
 import API from '../Utilities/APIConfig';
 
-// Create API Context
+// Create The API Context
 
 const APIContext = React.createContext();
 
@@ -26,7 +26,8 @@ const APIProvider = ({ children }) => {
     const [authenticatedUser, setAuthenticatedUser] = useState(Cookies.getJSON('authenticatedUser') || null);
 
     // Auth Config
-    // Function That Returns The Authentication Configuration Object
+    // This Function That Returns The Authentication Configuration Object
+    // Axios Will Use That Object To Authenticate The User
 
     const authConfig = () => ({ auth: { username: authenticatedUser.emailAddress, password: authenticatedUser.password } });
 
@@ -35,6 +36,8 @@ const APIProvider = ({ children }) => {
     const signIn = (credentials) => {
 
         const f = handleAsyncOperation (async ({ emailAddress, password }) => {
+
+            // Authenticate The User
 
             const { data } = await API.get('/users', { auth: { username: emailAddress, password } });
 
@@ -61,7 +64,12 @@ const APIProvider = ({ children }) => {
 
     const signOut = () => {
 
+        // Set The Authenticated User To Null
+
         setAuthenticatedUser(null);
+
+        // Remove The Cookie Of The Authenticated User
+
         Cookies.remove('authenticatedUser');
         
     }
@@ -72,7 +80,11 @@ const APIProvider = ({ children }) => {
 
         const f = handleAsyncOperation (async (details) => {
             
+            // Insert The New Course Into The Database
+
             const { data } = await API.post('/courses', details, authConfig());
+
+            // Return The Response
 
             return data;
 
@@ -88,9 +100,16 @@ const APIProvider = ({ children }) => {
 
         const f = handleAsyncOperation (async (updatedCourse) => {
 
+            // Extract The Course ID From The Updated Course Object
+
             const { id } = updatedCourse;
+
+            // Update The Course In The Database
+
             const { data } = await API.put('/courses/' + id, updatedCourse, authConfig());
             
+            // Return The Response
+
             return data;
 
         });
@@ -104,6 +123,8 @@ const APIProvider = ({ children }) => {
     const deleteCourse = (courseID) => {
 
         const f = handleAsyncOperation (async (courseID) => {
+
+            // Delete The Course From The Database
 
             await API.delete('/courses/' + courseID, authConfig());
 
@@ -121,7 +142,7 @@ const APIProvider = ({ children }) => {
     dataManager.updateCourse = updateCourse;
     dataManager.deleteCourse = deleteCourse;
 
-    // Define What To Provide
+    // Define What The API Context Should Provide
 
     const value = {
 

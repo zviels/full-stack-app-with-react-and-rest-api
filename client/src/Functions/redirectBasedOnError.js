@@ -8,8 +8,12 @@ const redirectBasedOnError = (history, error) => {
 
     switch (status) {
 
+        // If The Status Is 404, Navigate The User To The 'Not Found' Page
+
         case 404: history.push('/not-found');
                   break;
+
+        // By Default, Navigate The User To The 'Error' Page          
 
         default: history.push('/error');          
 

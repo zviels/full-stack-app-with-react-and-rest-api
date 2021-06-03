@@ -21,7 +21,7 @@ const UserSignUp = () => {
     const [confirmedPassword, setConfirmedPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    // Use Context
+    // Use Context To Extract The Useful Functions Of The Data Manager
 
     const { dataManager } = useContext(APIContext);
 
@@ -32,28 +32,49 @@ const UserSignUp = () => {
     // Helper Functions
 
     // Submit
+    // The Purpose Of This Function Is To Insert A New User Into The Database
 
     const submit = async (event) => {
 
+        // Prevent The Default Behavior Of The Browser When Submitting The Form
+
         event.preventDefault();
+
+        // If The Two Passwords Entered By The User Do Not Match - Display An Error Message
 
         if (password !== confirmedPassword)
             return setErrors([ 'The Two Passwords You Provided Do Not Match.' ]);
+
+        // Gather The Data About The New User
 
         const newUser = { firstName, lastName, emailAddress, password };
 
         try {
 
+            // Try To Insert The New User Into The Database
+
             await dataManager.signUp(newUser);
+
+            // Authenticate The User
+
             await dataManager.signIn({ emailAddress, password });
+
+            // Redirect The User To The Home Page
+
             history.push('/');
 
         } catch (error) {
             
+            // Try To Extract The Response Object From The Error Object
+
             const errorMessages = extractMessages(error);
+
+            // If The Response Object Exists, And Its Status Code Is 500 - Navigate The User To The 'Error' Page
 
             if (errorMessages)
                 setErrors(errorMessages);
+
+            // In Any Other Case, Display An Error Message On The Screen
 
             else
                 redirectBasedOnError(history, error);    

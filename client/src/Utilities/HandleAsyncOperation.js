@@ -1,4 +1,5 @@
 // handleAsyncOperation
+// This Function Receives A Callback Function, And Then Wraps It With Try & Catch
 
 const handleAsyncOperation = (callback) => {
 
@@ -9,10 +10,10 @@ const handleAsyncOperation = (callback) => {
             return await callback(param);
 
         } catch (error) {
+
+            // I Should Try To Rewrite This Function, Because Right Now It's Not Really Dealing With Any Error
             
             throw error;
-
-            // For Sign In & Sign Up, Get The Error Message From The API With 'Error.Response.Data.ErrorMessage'
 
         }
 

@@ -7,11 +7,12 @@ import { APIContext } from '../Context';
 
 const Header = () => {
 
-    // Use Context
+    // Use Context To Extract Required Data About The Authenticated User
 
     const { authenticatedUser } = useContext(APIContext);
 
     // Decide Which UL Element To Display
+    // If The User Is Logged In - Display The 'Signed In' Header
 
     const ul = authenticatedUser ? 
     
@@ -21,6 +22,8 @@ const Header = () => {
             <Link to="/sign-out">Sign Out</Link>
         </li>
     </ul>
+
+    // If The User Is Not Logged In - Display The 'Signed Out' Header
 
     :
 

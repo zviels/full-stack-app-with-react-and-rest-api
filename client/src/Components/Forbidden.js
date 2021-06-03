@@ -4,6 +4,8 @@ import React from 'react';
 
 const Forbidden = () => {
 
+    // JSX
+
     return (
 
         <div className="wrap">
