@@ -25,7 +25,7 @@ const ActionsBar = ({ courseDetails }) => {
         // If The User Is Not Logged In - Redirect Him To The 'Sign In' Page
 
         if (!(authenticatedUser))
-            return history.push('/sign-in');
+            return history.push('/signin');
 
         try {
 

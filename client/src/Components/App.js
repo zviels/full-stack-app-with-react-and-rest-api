@@ -30,13 +30,13 @@ const App = () => {
                         <Route exact path="/">
                             <Courses />
                         </Route>
-                        <Route path="/sign-up">
+                        <Route path="/signup">
                             <UserSignUp />
                         </Route>
-                        <Route path="/sign-in">
+                        <Route path="/signin">
                             <UserSignIn />
                         </Route>
-                        <Route path="/sign-out">
+                        <Route path="/signout">
                             <UserSignOut />
                         </Route>
                         <PrivateRoute path="/courses/create" component= { CreateCourse } />
@@ -44,7 +44,7 @@ const App = () => {
                             <CourseDetail />
                         </Route>
                         <PrivateRoute path="/courses/:id/update" component= { UpdateCourse } />
-                        <Route path="/not-found">
+                        <Route path="/notfound">
                             <NotFound />
                         </Route>
                         <Route path="/forbidden">
@@ -53,7 +53,7 @@ const App = () => {
                         <Route path="/error">
                             <UnhandledError />
                         </Route>
-                        <Redirect to="/not-found" />
+                        <Redirect to="/notfound" />
                     </Switch>
                 </main>
             </BrowserRouter>

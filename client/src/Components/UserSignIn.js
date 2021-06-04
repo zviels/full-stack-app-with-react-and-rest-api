@@ -116,7 +116,7 @@ const UserSignIn = () => {
                     Cancel
                 </button>
             </form>
-            <p>Don't Have A User Account? Click Here To <Link to="/sign-up">Sign Up</Link>!</p>
+            <p>Don't Have A User Account? Click Here To <Link to="/signup">Sign Up</Link>!</p>
         </div>
 
     );

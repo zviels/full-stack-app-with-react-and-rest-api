@@ -112,7 +112,7 @@ const UserSignUp = () => {
                 <button className="button" type="submit">Sign Up</button>
                 <button className="button button-secondary" onClick={ () => history.push('/') }>Cancel</button>
             </form>
-            <p>Already Have A User Account? Click Here To <Link to="/sign-in">Sign In</Link>!</p>
+            <p>Already Have A User Account? Click Here To <Link to="/signin">Sign In</Link>!</p>
         </div>
 
     );
