@@ -159,7 +159,7 @@ const UpdateCourse = () => {
                 <button className="button" type="submit">
                     Update Course
                 </button>
-                <button className="button button-secondary" onClick= { () => history.push('/') }>
+                <button className="button button-secondary" onClick= { () => history.push('/courses/' + id) }>
                     Cancel
                 </button>
             </form>
