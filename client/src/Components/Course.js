@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 
 const Course = ({ course }) => {
 
-    // Extract The Attributes 'ID' & 'Title' From The Course Object
+    // Extract Required Attributes From The Course Object
 
-    const { id, title } = course;
+    const { id, title, User } = course;
 
     // JSX
 
@@ -18,6 +18,7 @@ const Course = ({ course }) => {
             <h3 className="course--title">
                 { title }
             </h3>
+            <div className="course-creator">By { User.firstName } { User.lastName }</div>
         </Link>
 
     );
