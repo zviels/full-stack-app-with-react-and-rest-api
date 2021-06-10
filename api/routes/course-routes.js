@@ -36,12 +36,34 @@ router.get('/:id', handleAsyncOperation (async (req, res, next) => {
 
 router.get('/', handleAsyncOperation (async (req, res, next) => {
 
-    const courses = await Course.findAll({ 
+    let courses;
+    const { userID } = req.query;
+
+    if (userID) {
+
+        // Get Courses For A Specific User
+
+        courses = await Course.findAll({ 
             
-        attributes: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded'],
-        include: { model: User, attributes: ['id', 'firstName', 'lastName', 'emailAddress', 'password'] } 
-    
+            attributes: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded'],
+            include: { model: User, attributes: ['id', 'firstName', 'lastName', 'emailAddress', 'password'], where: { id: userID } } 
+        
         });
+
+    }
+
+    else {
+
+        // Get All Courses
+
+        courses = await Course.findAll({ 
+            
+            attributes: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded'],
+            include: { model: User, attributes: ['id', 'firstName', 'lastName', 'emailAddress', 'password'] } 
+        
+        });
+
+    }
 
     res.status(200).json(courses);
 

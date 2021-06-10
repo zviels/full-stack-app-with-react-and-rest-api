@@ -19,6 +19,9 @@ const Header = () => {
     <ul className="header--signedin">
         <li>Welcome, { authenticatedUser.firstName + ' ' + authenticatedUser.lastName }!</li>
         <li>
+            <Link to="/your-courses">Your Courses</Link>
+        </li>
+        <li>
             <Link to="/signout">Sign Out</Link>
         </li>
     </ul>

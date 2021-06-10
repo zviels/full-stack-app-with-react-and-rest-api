@@ -27,7 +27,7 @@ const App = () => {
                 <Header />
                 <main>
                     <Switch>
-                        <Route exact path="/">
+                        <Route key="all-courses" exact path="/">
                             <Courses />
                         </Route>
                         <Route path="/signup">
@@ -39,6 +39,7 @@ const App = () => {
                         <Route path="/signout">
                             <UserSignOut />
                         </Route>
+                        <PrivateRoute key="user-courses" path="/your-courses" component= { Courses } />
                         <PrivateRoute path="/courses/create" component= { CreateCourse } />
                         <Route exact path="/courses/:id">
                             <CourseDetail />

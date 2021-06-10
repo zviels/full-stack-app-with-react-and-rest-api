@@ -28,6 +28,22 @@ class DataManager {
 
     }
 
+    // getCourses
+    // This Function Returns A List Of Courses Created By A Specific User
+
+    getCoursesBy(userID) {
+
+        const f = handleAsyncOperation (async (userID) => {
+
+            const { data } = await API.get('/courses?userID=' + userID);
+            return data;
+
+        });
+
+        return f(userID);
+
+    }
+
     // getCourse
     // This Function Returns A Specific Course From The Database
 

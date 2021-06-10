@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import redirectBasedOnError from '../Functions/redirectBasedOnError';
@@ -19,11 +19,15 @@ const Courses = () => {
 
     // Use The API Context
 
-    const { dataManager } = useContext(APIContext);
+    const { dataManager, authenticatedUser } = useContext(APIContext);
 
     // Use History
 
     const history = useHistory();
+
+    // Use Location
+
+    const location = useLocation();
 
     // Helper Functions
 
@@ -31,11 +35,19 @@ const Courses = () => {
 
     const fetchCourses = async () => {
 
+        let courses;
+        const { pathname } = location;
+
         try {
 
             // Try To Fetch & Save Information About The Different Courses 
 
-            const courses = await dataManager.getCourses();
+            if (authenticatedUser && pathname === '/your-courses')
+                courses = await dataManager.getCoursesBy(authenticatedUser.id);
+
+            else
+                courses = await dataManager.getCourses();
+
             setCourses(courses);
         
         } catch (error) {
