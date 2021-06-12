@@ -1,12 +1,18 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
 import redirectBasedOnError from '../Functions/redirectBasedOnError';
 
+import Modal from './Modal';
+
 // The Actions Bar Component
 
 const ActionsBar = ({ courseDetails }) => {
+
+    // Use State
+
+    const [renderModal, setRenderModal] = useState(false);
 
     // Use Context To Extract Required Data
 
@@ -17,6 +23,10 @@ const ActionsBar = ({ courseDetails }) => {
     const history = useHistory();
 
     // Helper Functions
+
+    // handleClick
+
+    const handleClick = () => setRenderModal(true);
 
     // deleteCourse
 
@@ -33,7 +43,7 @@ const ActionsBar = ({ courseDetails }) => {
 
             if (authenticatedUser.id !== courseDetails.User.id)
                 return history.push('/forbidden');
-
+            
             // If The User Is Logged In & He Is The Creator Of The Course - Delete The Course
 
             await dataManager.deleteCourse(courseDetails.id);
@@ -52,6 +62,10 @@ const ActionsBar = ({ courseDetails }) => {
         
     }
 
+    // Modal
+
+    const modal = renderModal ? <Modal show= { setRenderModal } deleteCourse= { deleteCourse } /> : null;
+
     // showAdminButtons
     // Display The 'Update Course' & 'Delete Course' Buttons Only If The User Is Logged In, And He Is The Creator Of The Course
 
@@ -62,10 +76,11 @@ const ActionsBar = ({ courseDetails }) => {
             return (
 
                 <Fragment>
+                    { modal }
                     <Link className="button" to={ "/courses/" + courseDetails.id + "/update" }>
                         Update Course
                     </Link>
-                    <Link className="button" onClick= { deleteCourse } to="#">
+                    <Link className="button" onClick= { handleClick } to="#">
                         Delete Course
                     </Link>
                 </Fragment>

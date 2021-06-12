@@ -142,7 +142,7 @@ const CourseForm = ({ actionName }) => {
 
             // If All Went Well - Redirect The User To The Home Page
 
-            history.push('/');
+            history.push('/courses/' + id);
 
         } catch (error) {
 
