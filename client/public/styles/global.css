@@ -28,7 +28,7 @@ a {
     padding: 0 1rem;
 }
 header {
-    background: #37393A;
+    background: #223B59;
     color: #fff;
     padding: 1rem 0;
     margin-bottom: 2rem;
@@ -103,7 +103,7 @@ header nav a:hover {
     font-size: 2rem;
     margin-bottom: .5rem;
     font-weight: 700;
-    color: #274568;
+    color: #223B59;
 }
 .course-creator {
     color: #fff;
