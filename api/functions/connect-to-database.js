@@ -7,7 +7,7 @@ const connectToDatabase = async () => {
     try {
 
         await sequelize.authenticate();
-        console.log('Connection To The Database Has Been Estbalished Successfuly!');
+        console.log('Connection To The Database Has Been Established Successfuly!');
 
     } catch (error) {
 
