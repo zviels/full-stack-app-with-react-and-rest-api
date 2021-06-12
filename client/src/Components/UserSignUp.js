@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { APIContext } from '../Context';
@@ -23,11 +23,20 @@ const UserSignUp = () => {
 
     // Use Context To Extract The Useful Functions Of The Data Manager
 
-    const { dataManager } = useContext(APIContext);
+    const { dataManager, authenticatedUser } = useContext(APIContext);
 
     // Use History
 
     const history = useHistory();
+
+    // Use Effect
+
+    useEffect(() => {
+
+        if (authenticatedUser)
+            history.push('/');
+
+    }, []);
 
     // Helper Functions
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import { APIContext } from '../Context';
@@ -18,11 +18,20 @@ const UserSignIn = () => {
 
     // Use The API Context
 
-    const { dataManager } = useContext(APIContext);
+    const { dataManager, authenticatedUser } = useContext(APIContext);
 
     // Use History
 
     const history = useHistory();
+
+        // Use Effect
+
+        useEffect(() => {
+
+            if (authenticatedUser)
+                history.push('/');
+    
+        }, []);
 
     // Use Location
 
