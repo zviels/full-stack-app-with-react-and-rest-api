@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Full Stack App With React & REST API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full stack project I built for my portfolio during my studies at [Treehouse](https://teamtreehouse.com). In this final project, I first created a REST API using **Express**. This API provides a way to administer a school database containing information about users and courses. Users can interact with the database to create new courses, retrieve information on existing courses, and update or delete courses. In addition, the project requires users to create an account and sign it to make changes to the database. 
 
-## Available Scripts
+To create the back end of the project, I've used my knowledge of **NodeJS**, **Express**, **REST APIs** and **Sequelize**. I've also tested my work with [Postman](https://www.postman.com), a popular application for exploring and testing REST APIs.
 
-In the project directory, you can run:
+After creating the API, I've used **React**, **JSX**, **React Router**, **React Context API** and **Create React App** to form a client for my existing school database REST API.
 
-### `npm start`
+After Using the **Create React App** tool to set up my initial React app, I've -
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Used **JavaScript** and **JSX** to build out the components for my application in a modular fashion.
+- Used **React Router** to set up my routes.
+- Used **Axios** to fetch data from my REST API.
+- Allowed users to sign up, and used basic authentication to support users signing in.
+- Added CSS to personalize the project.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Table of Contents
 
-### `npm test`
+- [Preview](https://github.com/zviels/full-stack-app-with-react-and-rest-api#preview)
+- [Quick Start](https://github.com/zviels/full-stack-app-with-react-and-rest-api#quick-start)
+- [Overview](https://github.com/zviels/full-stack-app-with-react-and-rest-api#overview)
+- [Built With](https://github.com/zviels/full-stack-app-with-react-and-rest-api#built-with)
+- [Thanks](https://github.com/zviels/full-stack-app-with-react-and-rest-api#thanks)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Preview
 
-### `npm run build`
+<a href="https://react-courses-app.netlify.app/">
+  <img src="https://deab9i1yeabp0.cloudfront.net/github/treehouse/full-stack-app/full-stack-app.gif" alt="App Preview" width="100%">
+</a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Quick Start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The easiest way to view the app is by clicking [here](https://react-courses-app.netlify.app/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Note:** To deploy the back end of the project (i.e the Express app) to Heroku I had to convert the database from SQLite to PostgreSQL. If I had not done so, the entire SQLite database would have been deleted at least once every 24 hours. You can read more about this issue [here](https://devcenter.heroku.com/articles/sqlite3). You can explore the API online by clicking [here](https://courses-rest-api.herokuapp.com/). To deploy the front end of the project (i.e the React app) I've used [Netlify](https://netlify.com).
 
-### `npm run eject`
+If you wish to run this app locally on your machine, you'll have to - 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Download the ZIP file](https://github.com/zviels/full-stack-app-with-react-and-rest-api/archive/refs/heads/main.zip), extract it and open the project folder in your favorite code editor.
+- Open the terminal and run the commands `cd api`, `npm i`, `npm run seed` and `npm start`. These commands will start the Express server and initialize the database. 
+- Open a new, different terminal in your code editor. Then run the commands `cd client`, `npm i` and `npm start`. These commands will start the React development server.
+- Leave your code editor open and visit `localhost:3000` in your browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Overview
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+As mentioned above, I developed this app as part of my studies at [Treehouse](https://teamtreehouse.com). I participated in their [Techdegree](https://teamtreehouse.com/techdegree) program. In this section you can read about -
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- The topics I learned before I started developing the app.
+- The requirements I had to meet to complete this project.
+- The rating the project received.
 
-## Learn More
+### What Did I Learn?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Here is what I learned before I started working on the project -
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Introduction to REST APIs <img src="https://img.shields.io/badge/-Dev%20Tools%20Course-9b3b5a" alt="Dev Tools Course">
+- REST APIs with Express <img src="https://img.shields.io/badge/-JS%20Course-3659a2" alt="JS Course">
+- Data Relationships with SQL and Sequelize <img src="https://img.shields.io/badge/-JS%20Course-3659a2" alt="JS Course">
+- REST API Validation with Express <img src="https://img.shields.io/badge/-JS%20Course-3659a2" alt="JS Course">
+- GitHub Basics <img src="https://img.shields.io/badge/-Dev%20Tools%20Course-9b3b5a" alt="Dev Tools Course">
+- React Authentication <img src="https://img.shields.io/badge/-JS%20Course-3659a2" alt="JS Course">
 
-### Code Splitting
+I've also learned - 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- What **closures** are in JavaScript.
+- How to **validate models** in Sequelize.
+- How to use **Basic Authentication** to implement user authentication within an Express REST API application.
+- **What Agile software development is,** and how to apply it using **the Scrum methodology.**
+- Common **algorithms** and **data structures**.
+- How to use **React Hooks.**
 
-### Analyzing the Bundle Size
+### Project Requirements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This app is actually the product of **two** Techdegree projects, not just one.
 
-### Making a Progressive Web App
+To see the project requirements for building the REST API, click [here](https://deab9i1yeabp0.cloudfront.net/github/treehouse/rest-api/project-requirements.jpg).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+You can also view the project requirements for creating the client side of the app [here](https://deab9i1yeabp0.cloudfront.net/github/treehouse/full-stack-app/project-requirements.jpg).
 
-### Advanced Configuration
+### Rating
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+There are two possible grades for each Techdegree project - "Meets Expectations" and "Exceeds Expectations".
 
-### Deployment
+Both projects received the **"Exceeds Expectations"** rating.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+See the full **back end** project review [here](https://deab9i1yeabp0.cloudfront.net/github/treehouse/rest-api/project-review.jpg).
+See the full **front end** project review [here](https://deab9i1yeabp0.cloudfront.net/github/treehouse/full-stack-app/project-review.jpg).
 
-### `npm run build` fails to minify
+:100:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Built With
+
+- CSS
+- React
+- NodeJS
+- Express
+- SQLite
+- Sequelize
+
+## Thanks
+
+<a href="https://teamtreehouse.com">
+  <img src="https://deab9i1yeabp0.cloudfront.net/github/treehouse/treehouse-logo.png" alt="Treehouse Logo" width="100%">
+</a>
+
+Thanks to [Treehouse](https://teamtreehouse.com) for providing the starter CSS file for this project (`global.css`).
+
+**Note:** In this project I built all the pages from scratch, based on the mock up files I received.
+
+In addition, a huge thank you to everyone who reviewed the project! :grinning:
